@@ -8,14 +8,14 @@ interface AppTemplateSpec extends Lightning.Component.TemplateSpec {
   FruitDetail: typeof CFruitDetail
 }
 
-export interface ItemFromAPI {
-  label: string
-}
-
 export class App
   extends Lightning.Component<AppTemplateSpec>
   implements Lightning.Component.ImplementTemplateSpec<AppTemplateSpec>
 {
+  /**
+   * Application wrapper for placing the created components
+   */
+
   private readonly _FruitList = this.getByRef('FruitList')!
   private readonly _FruitDetail = this.getByRef('FruitDetail')!
   private focusIndex = 0

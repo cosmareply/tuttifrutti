@@ -18,6 +18,17 @@ export class CFruitList
   extends Lightning.Component<FruitListTemplateSpec, FruitListTypeConfig>
   implements Lightning.Component.ImplementTemplateSpec<FruitListTemplateSpec>
 {
+  /**
+   * This component implements the carousel cards in the bottom part of the screen.
+   * It implements the FruitListTemplateSpec interface, in which the necessary
+   * params are defined:
+   *
+   * @param itemsLoaded - Set to true if carousel data is ready to show (not implemented)
+   * @param items - The array containing the data for each fruit
+   * @emits changedFocusIndex(newIndex) - Event emitted when the focused card in the carousel changes
+   *
+   */
+
   private _itemsLoaded = false
   private _items = Array<FruitData>()
   private _focusedIndex = 0

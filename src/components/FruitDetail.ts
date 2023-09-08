@@ -15,6 +15,15 @@ export class CFruitDetail
   extends Lightning.Component<FruitDetailTemplateSpec>
   implements Lightning.Component.ImplementTemplateSpec<FruitDetailTemplateSpec>
 {
+  /**
+   * This component shows the detailed information of a specified fruit in the
+   * upper part of the screen.
+   * It also applies a soft gradient on the background: upper color is the color
+   * of the fruit, lower color is a soft grey for easy reading of the carousel.
+   *
+   * @param fruit - The detailed information on the fruit, UI refreshes on fruit set
+   */
+
   private readonly _upperGradient = this.getByRef('UpperGradient')!
   private readonly _title = this.getByRef('Title')!
   private readonly _description = this.getByRef('Description')!
