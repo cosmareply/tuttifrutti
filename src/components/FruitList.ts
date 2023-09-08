@@ -1,9 +1,9 @@
 import { Lightning } from '@lightningjs/sdk'
-import { ItemFromAPI } from '../App'
+import { FruitData, emptyFruit } from '../fruits'
 
 interface FruitListTemplateSpec extends Lightning.Component.TemplateSpec {
   itemsLoaded: boolean
-  items: Array<ItemFromAPI>
+  items: Array<FruitData>
 }
 
 interface FruitListSignalMap extends Lightning.Component.SignalMap {
@@ -19,13 +19,13 @@ export class CFruitList
   implements Lightning.Component.ImplementTemplateSpec<FruitListTemplateSpec>
 {
   private _itemsLoaded = false
-  private _items = Array<ItemFromAPI>()
+  private _items = Array<FruitData>()
   private _focusedIndex = 0
 
   static override _template(): Lightning.Component.Template<FruitListTemplateSpec> {
     return {
       x: 250,
-      y: (window.innerHeight * 2) / 3,
+      y: (window.innerHeight * 3) / 4,
       w: 0,
       h: 500,
     }
@@ -39,7 +39,7 @@ export class CFruitList
     return this._itemsLoaded
   }
 
-  set items(items: Array<ItemFromAPI>) {
+  set items(items: Array<FruitData>) {
     this._items = items
     this.children = items.map((item, index) => {
       return {
@@ -52,7 +52,7 @@ export class CFruitList
     this.patch({ w: items.length * (300 + 20) })
   }
 
-  get items(): Array<ItemFromAPI> {
+  get items(): Array<FruitData> {
     return this._items
   }
 
@@ -78,11 +78,9 @@ export class CFruitList
 }
 
 export interface FruitItemTemplateSpec extends Lightning.Component.TemplateSpec {
-  item: ItemFromAPI
-  Label: {
-    text: {
-      text: string
-    }
+  item: FruitData
+  Image: {
+    Contain: object
   }
 }
 
@@ -90,34 +88,47 @@ class FruitItemTemplate
   extends Lightning.Component<FruitItemTemplateSpec>
   implements Lightning.Component.ImplementTemplateSpec<FruitItemTemplateSpec>
 {
-  private readonly _Label = this.getByRef('Label')!
-  private _item: ItemFromAPI = { label: '' }
+  private readonly _Image = this.getByRef('Image')!
+  private _item: FruitData = emptyFruit
 
   static override _template(): Lightning.Component.Template<FruitItemTemplateSpec> {
     return {
       rect: true,
       w: 300,
       h: 200,
-      color: 0xffff00ff,
+      color: 0xffffffff,
       alpha: 0.5,
-      Label: {
-        x: 25,
-        y: 30,
-        mount: 0.5,
+      shader: { type: Lightning.shaders.RoundedRectangle, radius: 20 },
+      Image: {
+        x: 50,
+        y: 0,
+        w: 200,
+        h: 200,
+        zIndex: 1,
+        Contain: {
+          x: (w) => w / 2,
+          y: (h) => h / 2,
+          mount: 0.5,
+          texture: {
+            resizeMode: { type: 'contain', w: 200, h: 200 },
+            type: Lightning.textures.ImageTexture,
+            src: '',
+          },
+        },
       },
     }
   }
 
-  get item(): ItemFromAPI {
+  get item(): FruitData {
     return this._item
   }
 
-  set item(item: ItemFromAPI) {
+  set item(item: FruitData) {
     this._item = item
   }
 
   override _init() {
-    this._Label.patch({ text: { text: this.item.label } })
+    this._Image.patch({ Contain: { texture: { src: this.item.imageUrl } } })
   }
   override _focus() {
     this.patch({ smooth: { alpha: 1, scale: 1.1 } })
