@@ -1,5 +1,5 @@
 import { Lightning } from '@lightningjs/sdk'
-import { FruitData, emptyFruit } from '../fruits'
+import { FruitData, emptyFruit } from './fruitsData'
 
 interface FruitDetailTemplateSpec extends Lightning.Component.TemplateSpec {
   fruit: FruitData

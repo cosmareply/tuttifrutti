@@ -1,5 +1,6 @@
 import { Lightning } from '@lightningjs/sdk'
-import { FruitData, emptyFruit } from '../fruits'
+import { FruitData, emptyFruit } from './fruitsData'
+import Router from '@lightningjs/sdk/src/Router'
 
 interface FruitListTemplateSpec extends Lightning.Component.TemplateSpec {
   itemsLoaded: boolean
@@ -76,6 +77,8 @@ export class CFruitList
       this._focusedIndex--
       this.patch({ smooth: { x: this.x + 320 } })
       this.signal('changedFocusIndex', this._focusedIndex)
+    } else {
+      Router.focusWidget('menu')
     }
   }
 
