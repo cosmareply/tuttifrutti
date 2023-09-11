@@ -6,6 +6,5 @@ build
 build-ts
 releases
 .tmp
-.env
 .vscode
 .husky

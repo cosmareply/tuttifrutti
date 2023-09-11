@@ -6,6 +6,13 @@ import { ResultPhoto } from '../../lib/requests'
 interface PhotosPageTemplateSpec extends Lightning.Component.TemplateSpec {
   photos: Array<string>
   PhotosGrid: typeof Grid
+  Title: object
+}
+
+interface IndexObject {
+  index: number
+  previousIndex: number
+  dataLength: number
 }
 
 export class PhotosPage
@@ -14,19 +21,34 @@ export class PhotosPage
 {
   private _photos = Array<string>('')
   private readonly _PhotosGrid = this.getByRef('PhotosGrid')!
+  private readonly _Title = this.getByRef('Title')!
 
   static override _template(): Lightning.Component.Template<PhotosPageTemplateSpec> {
     return {
       w: window.innerWidth,
       h: window.innerHeight,
-      PhotosGrid: {
-        w: window.innerWidth - 100,
-        h: window.innerHeight - 200,
+      Title: {
         x: 100,
         y: 100,
+        alpha: 1.0,
+        text: {
+          text: 'Photos',
+          fontSize: 100,
+          textColor: 0xff000000,
+          fontStyle: 'bold',
+        },
+      },
+      PhotosGrid: {
+        w: window.innerWidth - 100,
+        h: window.innerHeight - 400,
+        x: 100,
+        y: 300,
         type: Grid,
         columns: 4,
         spacing: 30,
+        signals: {
+          onIndexChanged: '_onIndexChanged',
+        },
       },
     }
   }
@@ -37,6 +59,15 @@ export class PhotosPage
 
   get photos(): Array<string> {
     return this._photos
+  }
+
+  _onIndexChanged(idx: IndexObject) {
+    if (idx.index >= 8 && idx.previousIndex < 8) {
+      // Over third row
+      this._Title.patch({ smooth: { alpha: 0.0 } })
+    } else if (idx.index < 4 && idx.previousIndex >= 4) {
+      this._Title.patch({ smooth: { alpha: 1.0 } })
+    }
   }
 
   override _getFocused() {

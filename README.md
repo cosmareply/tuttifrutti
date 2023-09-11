@@ -19,6 +19,8 @@ npm install -g @lightningjs/cli
 
 3. Fire up a local webserver and open the App in a browser by running `lng serve` inside the root of your project
 
+Note: The images retrieved in the Photos page (`/#photos`) are blocked by the remote server CORS policy. In order to correctly visualize the page, please use an extension that prevents this policy enforcement (for example https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf).
+
 #### Developing the App
 
 During development you can use the **watcher** functionality of the _Lightning-CLI_.
