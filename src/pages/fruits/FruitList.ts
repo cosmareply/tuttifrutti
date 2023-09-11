@@ -77,9 +77,9 @@ export class CFruitList
       this._focusedIndex--
       this.patch({ smooth: { x: this.x + 320 } })
       this.signal('changedFocusIndex', this._focusedIndex)
-    } else {
+    } /* else {
       Router.focusWidget('menu')
-    }
+    } */
   }
 
   override _handleRight() {

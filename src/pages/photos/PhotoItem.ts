@@ -2,7 +2,9 @@ import { Lightning } from '@lightningjs/sdk'
 
 interface PhotoItemTemplateSpec extends Lightning.Component.TemplateSpec {
   photoUrl: string
+  photoId: string
   Image: object
+  Label: object
 }
 
 export default class PhotoItem
@@ -10,7 +12,9 @@ export default class PhotoItem
   implements Lightning.Component.ImplementTemplateSpec<PhotoItemTemplateSpec>
 {
   private readonly _Image = this.getByRef('Image')!
+  private readonly _Label = this.getByRef('Label')!
   private _photoUrl = ''
+  private _photoId = ''
 
   // Dimensions of element for Grid alignment
   static get width() {
@@ -39,6 +43,14 @@ export default class PhotoItem
           src: '',
         },
       },
+      Label: {
+        x: 20,
+        y: 20,
+        text: {
+          text: '',
+          textColor: 0xff000000,
+        },
+      },
     }
   }
 
@@ -54,6 +66,15 @@ export default class PhotoItem
 
   get photoUrl(): string {
     return this._photoUrl
+  }
+
+  set photoId(id: string) {
+    this._photoId = id
+    this._Label.patch({ text: { text: this._photoId } })
+  }
+
+  get photoId(): string {
+    return this._photoId
   }
 
   override _focus() {

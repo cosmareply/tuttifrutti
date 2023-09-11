@@ -1,4 +1,4 @@
-import { Lightning } from '@lightningjs/sdk'
+import { Lightning, Router } from '@lightningjs/sdk'
 import { CFruitList } from './FruitList'
 import { CFruitDetail } from './FruitDetail'
 import { emptyFruit, fruitsJSON } from './fruitsData'
@@ -52,5 +52,9 @@ export class FruitPage
 
   override _getFocused() {
     return this._FruitList
+  }
+
+  override _handleBack() {
+    Router.focusWidget('menu')
   }
 }

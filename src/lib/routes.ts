@@ -21,7 +21,7 @@ const routes: Router.Config = {
         return new Promise((resolve, reject) => {
           getPhotos()
             .then((result) => {
-              //page.photos = result
+              page.photos = result
               resolve()
             })
             .catch((e) => reject(e))

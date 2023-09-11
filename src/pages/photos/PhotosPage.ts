@@ -1,6 +1,7 @@
-import { Lightning } from '@lightningjs/sdk'
+import { Lightning, Router } from '@lightningjs/sdk'
 import { Grid } from '@lightningjs/ui'
 import PhotoItem from './PhotoItem'
+import { ResultPhoto } from '../../lib/requests'
 
 interface PhotosPageTemplateSpec extends Lightning.Component.TemplateSpec {
   photos: Array<string>
@@ -18,11 +19,11 @@ export class PhotosPage
     return {
       w: window.innerWidth,
       h: window.innerHeight,
-      x: 100,
-      y: 100,
       PhotosGrid: {
-        w: window.innerWidth,
-        h: window.innerHeight,
+        w: window.innerWidth - 100,
+        h: window.innerHeight - 200,
+        x: 100,
+        y: 100,
         type: Grid,
         columns: 4,
         spacing: 30,
@@ -44,14 +45,20 @@ export class PhotosPage
 
   override _onDataProvided() {
     if (this.photos != undefined) {
+      const photos = this.photos as Array<ResultPhoto>
       this._PhotosGrid.reload(
-        this.photos.map((photoUrl) => {
+        photos.map((photo) => {
           return {
             type: PhotoItem,
-            photoUrl: photoUrl,
+            photoUrl: photo.thumbnailUrl,
+            photoId: photo.id,
           }
         }),
       )
     }
+  }
+
+  override _handleBack() {
+    Router.focusWidget('menu')
   }
 }
