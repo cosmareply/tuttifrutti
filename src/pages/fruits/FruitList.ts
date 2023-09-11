@@ -1,6 +1,5 @@
 import { Lightning } from '@lightningjs/sdk'
 import { FruitData, emptyFruit } from './fruitsData'
-import Router from '@lightningjs/sdk/src/Router'
 
 interface FruitListTemplateSpec extends Lightning.Component.TemplateSpec {
   itemsLoaded: boolean

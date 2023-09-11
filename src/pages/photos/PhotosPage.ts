@@ -4,7 +4,7 @@ import PhotoItem from './PhotoItem'
 import { ResultPhoto } from '../../lib/requests'
 
 interface PhotosPageTemplateSpec extends Lightning.Component.TemplateSpec {
-  photos: Array<string>
+  photos: Array<ResultPhoto>
   PhotosGrid: typeof Grid
   Title: object
 }
@@ -19,7 +19,7 @@ export class PhotosPage
   extends Lightning.Component<PhotosPageTemplateSpec>
   implements Lightning.Component.ImplementTemplateSpec<PhotosPageTemplateSpec>
 {
-  private _photos = Array<string>('')
+  private _photos = Array<ResultPhoto>()
   private readonly _PhotosGrid = this.getByRef('PhotosGrid')!
   private readonly _Title = this.getByRef('Title')!
 
@@ -53,11 +53,11 @@ export class PhotosPage
     }
   }
 
-  set photos(photos: Array<string>) {
+  set photos(photos: Array<ResultPhoto>) {
     this._photos = photos
   }
 
-  get photos(): Array<string> {
+  get photos(): Array<ResultPhoto> {
     return this._photos
   }
 

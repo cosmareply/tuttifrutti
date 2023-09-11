@@ -37,16 +37,17 @@ export function getPhotos(): Promise<Array<ResultPhoto>> {
 
     request('https://graphqlzero.almansi.me/api', document, options)
       .then((result) => {
+        const parsedResult = result as Result
         if (
-          typeof result != 'object' ||
-          !result.photos ||
-          typeof result.photos != 'object' ||
-          !result.photos.data ||
-          typeof result.photos.data != 'object'
+          !parsedResult ||
+          typeof parsedResult != 'object' ||
+          !parsedResult.photos ||
+          typeof parsedResult.photos != 'object' ||
+          !parsedResult.photos.data ||
+          typeof parsedResult.photos.data != 'object'
         )
           reject()
 
-        const parsedResult = result as Result
         resolve(parsedResult.photos.data)
       })
       .catch((e) => reject(e))
