@@ -11,6 +11,11 @@ interface Result {
   }
 }
 
+/**
+ * It fetches the first page of photos to populate the Photos page
+ *
+ * @returns the promise on the array of photos as ResultPhoto[]
+ */
 export function getPhotos(): Promise<Array<ResultPhoto>> {
   return new Promise((resolve, reject) => {
     const options = {

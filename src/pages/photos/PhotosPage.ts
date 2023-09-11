@@ -19,6 +19,11 @@ export class PhotosPage
   extends Lightning.Component<PhotosPageTemplateSpec>
   implements Lightning.Component.ImplementTemplateSpec<PhotosPageTemplateSpec>
 {
+  /**
+   * This is the page containing the grid of fetched user's photos.
+   *
+   * @param photos - array of ResultPhoto containing the photos
+   */
   private _photos = Array<ResultPhoto>()
   private readonly _PhotosGrid = this.getByRef('PhotosGrid')!
   private readonly _Title = this.getByRef('Title')!
@@ -61,6 +66,7 @@ export class PhotosPage
     return this._photos
   }
 
+  /* Hide(show page title according to position in grid */
   _onIndexChanged(idx: IndexObject) {
     if (idx.index >= 8 && idx.previousIndex < 8) {
       // Over third row

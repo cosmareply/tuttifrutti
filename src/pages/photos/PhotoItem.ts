@@ -11,6 +11,12 @@ export default class PhotoItem
   extends Lightning.Component<PhotoItemTemplateSpec>
   implements Lightning.Component.ImplementTemplateSpec<PhotoItemTemplateSpec>
 {
+  /**
+   * This is the basic card showing the photo and its id in the grid view
+   *
+   * @param photoUrl - URL of the photo to render
+   * @param photoId - ID of the photo to show on top of the card
+   */
   private readonly _Image = this.getByRef('Image')!
   private readonly _Label = this.getByRef('Label')!
   private _photoUrl = ''

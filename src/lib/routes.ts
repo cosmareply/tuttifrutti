@@ -4,6 +4,9 @@ import { FruitPage } from '../pages/fruits/FruitPage'
 import { PhotosPage } from '../pages/photos/PhotosPage'
 import { getPhotos } from './requests'
 
+/**
+ * Routes definition
+ */
 const routes: Router.Config = {
   root: 'fruits',
 

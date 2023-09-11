@@ -2,6 +2,10 @@ import { Lightning } from '@lightningjs/sdk'
 import Router from '@lightningjs/sdk/src/Router'
 
 export default class Menu extends Lightning.Component {
+  /**
+   * Menu component shown on pressing on Backspace in any page, it allows navigating
+   * between the different routes
+   */
   private _index = 0
 
   static override _template(): Lightning.Component.Template {
